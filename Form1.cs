@@ -25,6 +25,7 @@ namespace DemoGitHub
             kq = a + b;
             labelKQ.Text = kq.ToString();
         }
+        // note
 
         private void label3_Click(object sender, EventArgs e)
         {
