@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
-
+// Hi hien
 // M chịu khó đổi đường dẫn CSDL thành đường dẫn chứa CSDL máy m thì mới chạy được nha
 
 namespace QuanLyKhoHang
@@ -22,12 +22,15 @@ namespace QuanLyKhoHang
         DataSet ds, ds1, ds2;
         public static string strUser;
         CungCapHam cc = new CungCapHam();
+        
+        
         public QLKhoHang()
         {
             
             InitializeComponent();
         }
-       
+        
+        
         private void QuanLyKhoHang_Load(object sender, EventArgs e)
         {
             
@@ -37,13 +40,13 @@ namespace QuanLyKhoHang
             tabControl3.Hide();
             DangNhap fm = new DangNhap();
             DialogResult result = fm.ShowDialog();
-            if (result == DialogResult.OK)
+            if (result == DialogResult.Yes)
             {
                 this.Show();
             }
             else
             {
-                Application.Exit();
+                this.Hide();
             }
 
             lbgetUser.Text = "Xin chào " + strUser;
@@ -63,6 +66,7 @@ namespace QuanLyKhoHang
             ds2 = SapXep();
             sapxep = ds2.Tables[0];
             dataGridView3.DataSource = sapxep;
+            dataGridView4.DataSource = sapxep;
 
         }
 
@@ -333,6 +337,23 @@ namespace QuanLyKhoHang
                     break;
                 }
             }
+        }
+
+        public void updatefrom ()
+        {
+            lbgetUser.Refresh();
+        }
+
+        private void đăngXuấtToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DangNhap fm = new DangNhap();
+            DialogResult result = fm.ShowDialog();
+            lbgetUser.Refresh();
+        }
+
+        private void label16_Click(object sender, EventArgs e)
+        {
+
         }
         
     }
