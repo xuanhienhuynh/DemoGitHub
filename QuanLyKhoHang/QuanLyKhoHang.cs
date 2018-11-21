@@ -43,6 +43,7 @@ namespace QuanLyKhoHang
             if (result == DialogResult.Yes)
             {
                 this.Show();
+                this.Refresh();
             }
             else
             {
@@ -67,6 +68,7 @@ namespace QuanLyKhoHang
             sapxep = ds2.Tables[0];
             dataGridView3.DataSource = sapxep;
             dataGridView4.DataSource = sapxep;
+            dataGridView5.DataSource = sapxep;
 
         }
 
@@ -119,28 +121,6 @@ namespace QuanLyKhoHang
             tabControl1.Hide();
             tabControl2.Hide();
         }
-
-
-
-        //public int ktTrung2(int a)
-        //{
-        //    string b = "SX0" + a;
-        //    string c;
-        //    textBox1.Text = "SX0" + a;
-        //    sqlcnn.Open();
-        //    while (b == textBox1.Text)
-        //    {
-        //        String kt = "SELECT * FROM NhapHang WHERE MaThung = '" + b + "'";
-        //        SqlCommand kt1 = new SqlCommand(kt, sqlcnn);
-        //        c = kt1.ExecuteScalar().ToString();
-        //        if (b != c) break;
-        //        a++;
-        //        b = "SX" + a;
-        //        textBox1.Text = "SX0" + a;
-        //    }
-        //    sqlcnn.Close();
-        //    return a;
-        //}
 
         private void btThem1_Click(object sender, EventArgs e)
         {
@@ -347,13 +327,67 @@ namespace QuanLyKhoHang
         private void đăngXuấtToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DangNhap fm = new DangNhap();
+            this.Refresh();
             DialogResult result = fm.ShowDialog();
             lbgetUser.Refresh();
+            this.Refresh();
         }
 
         private void label16_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnLayHang_Click(object sender, EventArgs e)
+        {
+            sqlcnn.Open();
+            String a;
+            int total;
+            String select = "SELECT SoLuong FROM SanPham WHERE MaSP = '" + txtMaSP5.Text + "';";
+            SqlCommand selectcmd = new SqlCommand(select, sqlcnn);
+            a = selectcmd.ExecuteScalar().ToString();
+            if (int.Parse(txtSL5.Text) < int.Parse(a))
+            {
+                this.textBox3.Text = txtSL5.Text;
+                this.textBox4.Text = a;
+                int x = int.Parse(textBox3.Text);
+                int y = int.Parse(textBox4.Text);
+                total = y - x;
+                String update = "UPDATE SanPham SET SoLuong = '" + total.ToString() + "' WHERE MaSP = '" + txtMaSP5.Text + "';";
+                SqlCommand updatecmd = new SqlCommand(update, sqlcnn);
+                updatecmd.ExecuteNonQuery();
+                MessageBox.Show("Cap nhap thành công");
+                loadData();
+            }
+            else if (int.Parse(txtSL5.Text) == int.Parse(a))
+            {
+                String delete = "DELETE FROM SanPham WHERE MaSP = '" + txtMaSP5.Text + "';";
+                SqlCommand deleteCmd = new SqlCommand(delete, sqlcnn);
+                deleteCmd.ExecuteNonQuery();
+                MessageBox.Show("Xóa thành công");
+            }
+            else
+            {
+                MessageBox.Show("số lượng cần lấy lớn hơn SP đang tồn");
+            }
+            sqlcnn.Close();
+        }
+
+        public void loadData()
+        {
+            ds = getProduct();
+            productTable = ds.Tables[0];
+            dataGridView1.DataSource = productTable;
+
+            ds1 = getLocationProduct();
+            LocationProduct = ds1.Tables[0];
+            dataGridView2.DataSource = LocationProduct;
+
+            ds2 = SapXep();
+            sapxep = ds2.Tables[0];
+            dataGridView3.DataSource = sapxep;
+            dataGridView4.DataSource = sapxep;
+            dataGridView5.DataSource = sapxep;
         }
         
     }
