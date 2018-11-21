@@ -38,6 +38,7 @@ namespace QuanLyKhoHang
             tabControl1.Hide();
             tabControl2.Hide();
             tabControl3.Hide();
+            tabControl4.Hide();
             DangNhap fm = new DangNhap();
             DialogResult result = fm.ShowDialog();
             if (result == DialogResult.Yes)
@@ -97,29 +98,6 @@ namespace QuanLyKhoHang
             SqlDataAdapter da2 = new SqlDataAdapter(sql1, sqlcnn);
             int number = da2.Fill(ds2);
             return ds2;
-        }
-
-        private void nhapVaoKhoHangToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //panel1.Show();
-            tabControl1.Show();
-            tabControl2.Hide();
-            tabControl3.Hide();
-        }
-
-        private void sapXepToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //panel1.Hide();
-            tabControl2.Show();
-            tabControl1.Hide();
-            tabControl3.Hide();
-        }
-
-        private void tonKhoDinhKiToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            tabControl3.Show();
-            tabControl1.Hide();
-            tabControl2.Hide();
         }
 
         private void btThem1_Click(object sender, EventArgs e)
@@ -389,6 +367,59 @@ namespace QuanLyKhoHang
             dataGridView4.DataSource = sapxep;
             dataGridView5.DataSource = sapxep;
         }
+
+        private void toolStripMenuItemInput_Click(object sender, EventArgs e)
+        {
+            tabControl1.Show();
+            tabControl2.Hide();
+            tabControl3.Hide();
+            tabControl4.Hide();
+        }
+
+        private void ToolStripMenuItemSort_Click(object sender, EventArgs e)
+        {
+            tabControl1.Hide();
+            tabControl2.Show();
+            tabControl3.Hide();
+            tabControl4.Hide();
+        }
+
+        private void ToolStripMenuItemTonKho_Click(object sender, EventArgs e)
+        {
+            tabControl1.Hide();
+            tabControl2.Hide();
+            tabControl3.Show();
+            tabControl4.Hide();
+        }
+
+        private void toolStripMenuItemOutput_Click(object sender, EventArgs e)
+        {
+            tabControl1.Hide();
+            tabControl2.Hide();
+            tabControl3.Hide();
+            tabControl4.Show();
+        }
+
+        private void btHuy2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbSL2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+       
+
+        
+
+        
         
     }
 }
